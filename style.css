@@ -11,12 +11,13 @@ body {
 header {
     background: #000; /* Dark header background */
     color: #fff;
-    padding: 1rem 0;
+    padding: 1.5rem 0; /* Bigger padding */
     text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2rem; /* Bigger font size */
 }
 
 nav ul {
@@ -28,7 +29,7 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 20px; /* Bigger margin */
 }
 
 nav ul li a {
@@ -36,6 +37,7 @@ nav ul li a {
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
+    font-size: 1.2rem; /* Bigger font size */
 }
 
 nav ul li a:hover {
@@ -43,38 +45,40 @@ nav ul li a:hover {
 }
 
 main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+    max-width: 900px; /* Bigger max width */
+    margin: 30px auto; /* Bigger margin */
+    padding: 30px; /* Bigger padding */
     background: #444; /* Dark background */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Bigger shadow */
+    border-radius: 12px; /* Bigger border radius */
 }
 
 section {
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Bigger margin */
 }
 
 section h2 {
     color: #f4f4f4; /* Light text color */
-    border-bottom: 2px solid #ffd700;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    border-bottom: 3px solid #ffd700; /* Bigger border */
+    padding-bottom: 15px; /* Bigger padding */
+    margin-bottom: 30px; /* Bigger margin */
+    font-size: 1.8rem; /* Bigger font size */
 }
 
 footer {
     background: #000; /* Dark footer background */
     color: #fff;
     text-align: center;
-    padding: 10px 0;
+    padding: 15px 0; /* Bigger padding */
     width: 100%;
     bottom: 0;
 }
 
 /* Custom Scrollbar */
 body::-webkit-scrollbar {
-    width: 12px;
+    width: 14px; /* Bigger width */
 }
+
 
 body::-webkit-scrollbar-track {
     background: #333; /* Dark background */
@@ -138,22 +142,27 @@ img {
     background-color: #ffea00; /* Slightly lighter yellow on hover */
 }
 
+.command code strong {
+    color: rgb(255, 255, 255);
+}
+
 /* Медийни заявки за мобилен изглед */
 @media only screen and (max-width: 600px) {
     header {
         padding: 0.5rem 0;
     }
     nav ul li {
-        margin: 0 10px;
+        margin: 0 8px; /* Reduced margin */
     }
     main {
-        padding: 10px;
+        padding: 8px; /* Reduced padding */
+        max-width: 90%; /* Adjusted max width */
     }
     section h2 {
-        font-size: 1.5rem;
+        font-size: 1.2rem; /* Reduced font size */
     }
     .copy-button {
-        padding: 8px 15px;
-        font-size: 14px;
+        padding: 6px 12px; /* Reduced padding */
+        font-size: 12px; /* Reduced font size */
     }
 }

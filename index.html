@@ -35,18 +35,6 @@
             <img src="/images/prerequisites.png" alt="Prerequisites Image">
         </section>
         <section id="guide">
-            <h2>Step-by-Step Guide</h2>
-            <h3>Step 1: Unlock Bootloader</h3>
-            <p>Follow these steps to unlock your bootloader...</p>
-            <h3>Step 2: Install Custom Recovery</h3>
-            <p>Steps to install TWRP...</p>
-            <h3>Step 3: Partitioning your device</h3>
-            <p>Prerequisites:</p>
-            <ul>
-                <li>Modded OFOX</li>
-                <li>ADB & Fastboot</li>
-                <li>Brain (Very important)</li>
-            </ul>
             <h4>Notes:</h4>
             <ul>
                 <li><strong>Warning:</strong> All your data will be erased! Back up now if needed.</li>
@@ -59,12 +47,12 @@
             <h4>Flash OFOX recovery</h4>
             <p>While in fastboot, run:</p>
             <pre id="command1"><code>fastboot flash recovery &lt;ofox.img&gt;</code></pre>
-            <button class="copy-button" onclick="copyCommand('command1')">Copy Command</button>
+            <button class="copy-button" onclick="copyCommand('command1')">copy</button>
             <h4>Run the partitioning script</h4>
             <p>Replace <code>$</code> with the amount of storage you want Windows to have (do not add GB, just write the number).</p>
             <p>If it asks you to run it once again, do so:</p>
             <pre id="command2"><code>adb shell partition $</code></pre>
-            <button class="copy-button" onclick="copyCommand('command2')">Copy Command</button>
+            <button class="copy-button" onclick="copyCommand('command2')">Copy</button>
             <h4>Check if Android still starts</h4>
             <p>Just restart the phone, and see if Android still works.</p>
             <p>Next step: Installing Windows</p>
