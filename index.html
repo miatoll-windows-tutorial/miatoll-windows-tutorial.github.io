@@ -1,76 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Install Windows on Miatoll</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zombie Top Down Shooter</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+    canvas {
+        display: block;
+    }
+    #game-over {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: white;
+    }
+    #score {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 18px;
+        color: white;
+    }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Install Windows on Miatoll</h1>
-        <nav>
-            <ul>
-                <li><a href="#introduction">Introduction</a></li>
-                <li><a href="#prerequisites">Prerequisites</a></li>
-                <li><a href="#guide">Guide</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="introduction">
-            <h2>Introduction</h2>
-            <p>Running Windows on the Redmi Note 9 Pro / 9 Pro India / 10 Lite / 9S / 9 Pro max India / Poco M2 Pro</p>
-        </section>
-        <section id="prerequisites">
-            <h2>Prerequisites</h2>
-            <ul>
-                <li>ADB and Fastboot (Platform Tools) (<a href="https://developer.android.com/studio/releases/platform-tools" download>Download here</a>)</li>
-                <li>Custom Recovery (Modded OFOX) (<a href="https://github.com/Rubanoxd/Port-Windows-11-redmi-note-9_pro/releases/tag/modded-ofox" download>Download here</a>)</li>
-                <li>Windows on ARM image (<a href="https://worproject.com/esd" download>Download here</a>)</li>
-                <li>Drivers (<a href="https://github.com/N1kroks/7xx-Drivers/releases" download>Download here</a>)</li>
-            </ul>
-            <img src="/images/prerequisites.png" alt="Prerequisites Image">
-        </section>
-        <section id="guide">
-            <h4>Notes:</h4>
-            <ul>
-                <li><strong>Warning:</strong> All your data will be erased! Back up now if needed.</li>
-                <li>These commands have been tested.</li>
-                <li>Do not run the same command twice.</li>
-                <li>DO NOT REBOOT YOUR PHONE if you think you made a mistake, ask for help in the Telegram chat.</li>
-                <li>Do not run all commands at once, execute them in order!</li>
-                <li><strong>DO NOT MAKE ANY MISTAKE!!! YOU CAN BREAK YOUR DEVICE WITH THE COMMANDS BELOW IF YOU DO THEM WRONG!!!</strong></li>
-            </ul>
-            <h4>Flash OFOX recovery</h4>
-            <p>While in fastboot, run:</p>
-            <pre id="command1"><code>fastboot flash recovery &lt;ofox.img&gt;</code></pre>
-            <button class="copy-button" onclick="copyCommand('command1')">copy</button>
-            <h4>Run the partitioning script</h4>
-            <p>Replace <code>$</code> with the amount of storage you want Windows to have (do not add GB, just write the number).</p>
-            <p>If it asks you to run it once again, do so:</p>
-            <pre id="command2"><code>adb shell partition $</code></pre>
-            <button class="copy-button" onclick="copyCommand('command2')">Copy</button>
-            <h4>Check if Android still starts</h4>
-            <p>Just restart the phone, and see if Android still works.</p>
-            <p>Next step: Installing Windows</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Miatoll Windows Installation Guide</p>
-    </footer>
+<div id="game-over" style="display: none;">
+    <button onclick="restartGame()">Play Again</button>
+</div>
+<div id="score">Score: 0</div>
 
-    <script>
-        function copyCommand(id) {
-            var commandText = document.getElementById(id).innerText;
-            var tempTextArea = document.createElement('textarea');
-            tempTextArea.value = commandText;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
-            alert('Command copied to clipboard!');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script>
+let player;
+let zombies = [];
+let bullets = [];
+let gameOver = true;
+let score = 0;
+
+function setup() {
+    createCanvas(displayWidth, displayHeight);
+    player = new Player();
+    gameOver = false;
+}
+
+function draw() {
+    background(51);
+    
+    if (!gameOver) {
+        player.update();
+        player.show();
+        
+        if (random(1) < 0.01) {
+            zombies.push(new Zombie());
         }
-    </script>
+        
+        for (let i = zombies.length - 1; i >= 0; i--) {
+            zombies[i].update(player);
+            zombies[i].show();
+
+            if (player.hits(zombies[i])) {
+                gameOver = true;
+                break;
+            }
+        }
+
+        for (let bullet of bullets) {
+            bullet.update();
+            bullet.show();
+            
+            for (let j = zombies.length - 1; j >= 0; j--) {
+                if (bullet.hits(zombies[j])) {
+                    zombies.splice(j, 1);
+                    bullets.splice(bullets.indexOf(bullet), 1);
+                    score += 10; // Increase score by 10 for each hit
+                    document.getElementById('score').innerText = 'Score: ' + score;
+                }
+            }
+        }
+    }
+    
+    if (gameOver) {
+        textAlign(CENTER);
+        text("Game Over", width/2, height/2);
+        document.getElementById('game-over').style.display = 'block';
+    }
+}
+
+function restartGame() {
+    player = new Player();
+    zombies = [];
+    bullets = [];
+    gameOver = false;
+    score = 0; // Reset score when restarting
+    document.getElementById('score').innerText = 'Score: ' + score;
+    document.getElementById('game-over').style.display = 'none';
+}
+
+class Player {
+    constructor() {
+        this.x = displayWidth / 2;
+        this.y = displayHeight / 2;
+        this.size = 20;
+    }
+    
+    update() {
+        if (touches.length > 0) {
+            let touchX = touches[0].x;
+            let touchY = touches[0].y;
+            let angle = atan2(touchY - this.y, touchX - this.x);
+            this.x += cos(angle) * 5;
+            this.y += sin(angle) * 5;
+        }
+    }
+    
+    show() {
+        fill(255);
+        ellipse(this.x, this.y, this.size, this.size);
+    }
+    
+    shoot() {
+        let angle = atan2(touches[0].y - this.y, touches[0].x - this.x);
+        let bullet = new Bullet(this.x, this.y, angle);
+        bullets.push(bullet);
+    }
+    
+    hits(zombie) {
+        let d = dist(this.x, this.y, zombie.x, zombie.y);
+        return d < this.size / 2 + zombie.size / 2;
+    }
+}
+
+class Zombie {
+    constructor() {
+        this.x = random(displayWidth);
+        this.y = random(displayHeight);
+        this.size = 20;
+    }
+    
+    update(target) {
+        let dx = target.x - this.x;
+        let dy = target.y - this.y;
+        let angle = atan2(dy, dx);
+        this.x += cos(angle) * 1.5;
+        this.y += sin(angle) * 1.5;
+    }
+    
+    show() {
+        fill(0, 255, 0);
+        ellipse(this.x, this.y, this.size, this.size);
+    }
+}
+
+class Bullet {
+    constructor(x, y, angle) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
+        this.speed = 10;
+    }
+    
+    update() {
+        this.x += cos(this.angle) * this.speed;
+        this.y += sin(this.angle) * this.speed;
+    }
+    
+    show() {
+        fill(255, 0, 0);
+        ellipse(this.x, this.y, 5, 5);
+    }
+    
+    hits(zombie) {
+        let d = dist(this.x, this.y, zombie.x, zombie.y);
+        return d < 10;
+    }
+}
+
+function touchStarted() {
+    if (!gameOver) {
+        player.shoot();
+    }
+}
+</script>
 </body>
 </html>
