@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zombie Top Down Shooter</title>
+<title>3D Zombie Shooter</title>
 <style>
     body {
         margin: 0;
@@ -12,179 +12,74 @@
     canvas {
         display: block;
     }
-    #game-over {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 24px;
-        color: white;
-    }
-    #score {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 18px;
-        color: white;
-    }
 </style>
 </head>
 <body>
-<div id="game-over" style="display: none;">
-    <button onclick="restartGame()">Play Again</button>
-</div>
-<div id="score">Score: 0</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="https://threejs.org/build/three.js"></script>
 <script>
-let player;
-let zombies = [];
-let bullets = [];
+let camera, scene, renderer;
+let player, zombies = [];
 let gameOver = true;
-let score = 0;
+let clock = new THREE.Clock();
 
-function setup() {
-    createCanvas(displayWidth, displayHeight);
-    player = new Player();
-    gameOver = false;
+init();
+animate();
+
+function init() {
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 10, 20);
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    player = new THREE.Mesh(
+        new THREE.BoxGeometry(1, 2, 1),
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
+    );
+    scene.add(player);
+
+    // Create zombies
+    createZombies();
+
+    window.addEventListener('resize', onWindowResize);
 }
 
-function draw() {
-    background(51);
-    
-    if (!gameOver) {
-        player.update();
-        player.show();
-        
-        if (random(1) < 0.01) {
-            zombies.push(new Zombie());
-        }
-        
-        for (let i = zombies.length - 1; i >= 0; i--) {
-            zombies[i].update(player);
-            zombies[i].show();
-
-            if (player.hits(zombies[i])) {
-                gameOver = true;
-                break;
-            }
-        }
-
-        for (let bullet of bullets) {
-            bullet.update();
-            bullet.show();
-            
-            for (let j = zombies.length - 1; j >= 0; j--) {
-                if (bullet.hits(zombies[j])) {
-                    zombies.splice(j, 1);
-                    bullets.splice(bullets.indexOf(bullet), 1);
-                    score += 10; // Increase score by 10 for each hit
-                    document.getElementById('score').innerText = 'Score: ' + score;
-                }
-            }
-        }
-    }
-    
-    if (gameOver) {
-        textAlign(CENTER);
-        text("Game Over", width/2, height/2);
-        document.getElementById('game-over').style.display = 'block';
+function createZombies() {
+    for (let i = 0; i < 10; i++) {
+        let zombie = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.5, 0.5, 2, 8),
+            new THREE.MeshBasicMaterial({ color: 0xdd3333 })
+        );
+        zombie.position.set(Math.random() * 20 - 10, 0, Math.random() * 20 - 10);
+        zombies.push(zombie);
+        scene.add(zombie);
     }
 }
 
-function restartGame() {
-    player = new Player();
-    zombies = [];
-    bullets = [];
-    gameOver = false;
-    score = 0; // Reset score when restarting
-    document.getElementById('score').innerText = 'Score: ' + score;
-    document.getElementById('game-over').style.display = 'none';
+function animate() {
+    requestAnimationFrame(animate);
+    update();
+    render();
 }
 
-class Player {
-    constructor() {
-        this.x = displayWidth / 2;
-        this.y = displayHeight / 2;
-        this.size = 20;
-    }
-    
-    update() {
-        if (touches.length > 0) {
-            let touchX = touches[0].x;
-            let touchY = touches[0].y;
-            let angle = atan2(touchY - this.y, touchX - this.x);
-            this.x += cos(angle) * 5;
-            this.y += sin(angle) * 5;
-        }
-    }
-    
-    show() {
-        fill(255);
-        ellipse(this.x, this.y, this.size, this.size);
-    }
-    
-    shoot() {
-        let angle = atan2(touches[0].y - this.y, touches[0].x - this.x);
-        let bullet = new Bullet(this.x, this.y, angle);
-        bullets.push(bullet);
-    }
-    
-    hits(zombie) {
-        let d = dist(this.x, this.y, zombie.x, zombie.y);
-        return d < this.size / 2 + zombie.size / 2;
-    }
+function update() {
+    const delta = clock.getDelta();
+
+    // Update player position based on input or device orientation
+    // Update zombie positions and logic
 }
 
-class Zombie {
-    constructor() {
-        this.x = random(displayWidth);
-        this.y = random(displayHeight);
-        this.size = 20;
-    }
-    
-    update(target) {
-        let dx = target.x - this.x;
-        let dy = target.y - this.y;
-        let angle = atan2(dy, dx);
-        this.x += cos(angle) * 1.5;
-        this.y += sin(angle) * 1.5;
-    }
-    
-    show() {
-        fill(0, 255, 0);
-        ellipse(this.x, this.y, this.size, this.size);
-    }
+function render() {
+    renderer.render(scene, camera);
 }
 
-class Bullet {
-    constructor(x, y, angle) {
-        this.x = x;
-        this.y = y;
-        this.angle = angle;
-        this.speed = 10;
-    }
-    
-    update() {
-        this.x += cos(this.angle) * this.speed;
-        this.y += sin(this.angle) * this.speed;
-    }
-    
-    show() {
-        fill(255, 0, 0);
-        ellipse(this.x, this.y, 5, 5);
-    }
-    
-    hits(zombie) {
-        let d = dist(this.x, this.y, zombie.x, zombie.y);
-        return d < 10;
-    }
-}
-
-function touchStarted() {
-    if (!gameOver) {
-        player.shoot();
-    }
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 </script>
 </body>
