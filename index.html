@@ -3,83 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D Zombie Shooter</title>
+<title>Flappy Bird</title>
 <style>
     body {
         margin: 0;
         overflow: hidden;
+        background-color: #70c5ce; /* sky blue */
     }
     canvas {
         display: block;
+        margin: 0 auto;
+        background-color: #f7ec4d; /* yellow */
+        border: 5px solid #090909; /* black */
+        border-radius: 10px;
     }
 </style>
 </head>
 <body>
-<script src="https://threejs.org/build/three.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 <script>
-let camera, scene, renderer;
-let player, zombies = [];
-let gameOver = true;
-let clock = new THREE.Clock();
+let bird;
+let pipes = [];
+let score = 0;
+let gamePaused = false;
+let gameOver = false;
 
-init();
-animate();
-
-function init() {
-    scene = new THREE.Scene();
-
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 10, 20);
-
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    player = new THREE.Mesh(
-        new THREE.BoxGeometry(1, 2, 1),
-        new THREE.MeshBasicMaterial({ color: 0xffffff })
-    );
-    scene.add(player);
-
-    // Create zombies
-    createZombies();
-
-    window.addEventListener('resize', onWindowResize);
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    bird = new Bird();
+    pipes.push(new Pipe());
 }
 
-function createZombies() {
-    for (let i = 0; i < 10; i++) {
-        let zombie = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.5, 0.5, 2, 8),
-            new THREE.MeshBasicMaterial({ color: 0xdd3333 })
-        );
-        zombie.position.set(Math.random() * 20 - 10, 0, Math.random() * 20 - 10);
-        zombies.push(zombie);
-        scene.add(zombie);
+function draw() {
+    background(112, 197, 206); // sky blue
+
+    if (!gameOver) {
+        for (let i = pipes.length - 1; i >= 0; i--) {
+            pipes[i].update();
+            pipes[i].show();
+
+            if (pipes[i].hits(bird)) {
+                gameOver = true;
+            }
+
+            if (pipes[i].offscreen()) {
+                pipes.splice(i, 1);
+                score++;
+            }
+        }
+
+        bird.update();
+        bird.show();
+
+        if (frameCount % 120 === 0) { // Spawn new pipe every 120 frames
+            pipes.push(new Pipe());
+        }
+
+        textSize(32);
+        fill(255);
+        text("Score: " + score, 20, 40);
+    }
+
+    if (gameOver) {
+        textSize(64);
+        fill(255, 0, 0);
+        textAlign(CENTER);
+        text("Game Over", width / 2, height / 2);
     }
 }
 
-function animate() {
-    requestAnimationFrame(animate);
-    update();
-    render();
+function keyPressed() {
+    if (key === ' ' && !gameOver && !gamePaused) {
+        bird.up();
+    } else if (key === ' ' && gameOver) {
+        restartGame();
+    }
 }
 
-function update() {
-    const delta = clock.getDelta();
-
-    // Update player position based on input or device orientation
-    // Update zombie positions and logic
+function touchStarted() {
+    if (!gameOver && !gamePaused) {
+        bird.up();
+    } else if (gameOver) {
+        restartGame();
+    }
 }
 
-function render() {
-    renderer.render(scene, camera);
+function restartGame() {
+    bird = new Bird();
+    pipes = [];
+    score = 0;
+    gameOver = false;
 }
 
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+class Bird {
+    constructor() {
+        this.y = height / 2;
+        this.x = 64;
+        this.gravity = 0.6;
+        this.lift = -12;
+        this.velocity = 0;
+        this.icon = loadImage('bird.png');
+    }
+
+    show() {
+        image(this.icon, this.x, this.y, 50, 50);
+    }
+
+    update() {
+        this.velocity += this.gravity;
+        this.velocity *= 0.9; // Air resistance
+        this.y += this.velocity;
+
+        if (this.y > height) {
+            this.y = height;
+            this.velocity = 0;
+        }
+        if (this.y < 0) {
+            this.y = 0;
+            this.velocity = 0;
+        }
+    }
+
+    up() {
+        this.velocity += this.lift;
+    }
+}
+
+class Pipe {
+    constructor() {
+        this.top = random(height / 2);
+        this.bottom = random(height / 2);
+        this.x = width;
+        this.w = 20;
+        this.speed = 3;
+        this.highlight = false;
+    }
+
+    show() {
+        fill(0, 200, 0); // green
+        if (this.highlight) {
+            fill(255, 0, 0); // red if hits bird
+        }
+        rect(this.x, 0, this.w, this.top);
+        rect(this.x, height - this.bottom, this.w, this.bottom);
+    }
+
+    update() {
+        this.x -= this.speed;
+    }
+
+    offscreen() {
+        return this.x < -this.w;
+    }
+
+    hits(bird) {
+        if (bird.y < this.top || bird.y > height - this.bottom) {
+            if (bird.x > this.x && bird.x < this.x + this.w) {
+                this.highlight = true;
+                return true;
+            }
+        }
+        this.highlight = false;
+        return false;
+    }
 }
 </script>
 </body>
