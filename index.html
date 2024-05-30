@@ -27,6 +27,11 @@ let pipes = [];
 let score = 0;
 let gamePaused = false;
 let gameOver = false;
+let birdImg;
+
+function preload() {
+    birdImg = loadImage('bird.png');
+}
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -102,11 +107,10 @@ class Bird {
         this.gravity = 0.6;
         this.lift = -12;
         this.velocity = 0;
-        this.icon = loadImage('bird.png');
     }
 
     show() {
-        image(this.icon, this.x, this.y, 50, 50);
+        image(birdImg, this.x, this.y, 50, 50);
     }
 
     update() {
