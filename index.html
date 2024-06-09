@@ -1,251 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Windows on Redmi Note 9 Pro / 9 Pro India / 10 Lite / 9S / 9 Pro max India / Poco M2 Pro</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 port on Miatoll</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #141E30, #243B55);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 1rem;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            h2.text-4xl {
+                font-size: 2.25rem; /* Tailwind's text-3xl */
+            }
+            h2.text-3xl {
+                font-size: 1.875rem; /* Tailwind's text-2xl */
+            }
+            p.text-lg {
+                font-size: 1rem; /* Tailwind's text-base */
+            }
+            button {
+                width: 100%;
+                padding: 1rem;
+            }
+            .container.mx-auto {
+                padding: 0 1rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-  <header class="bg-transparent py-6 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="#" class="text-3xl font-bold">Windows on Miatoll</a>
-      <nav class="hidden md:block">
-        <ul class="flex space-x-6">
-          <li><a href="#features" class="hover:text-gray-300 transition-colors duration-300">Features</a></li>
-          <li><a href="#installation" class="hover:text-gray-300 transition-colors duration-300">Installation</a></li>
-          <li><a href="#contributors" class="hover:text-gray-300 transition-colors duration-300">Contributors</a></li>
-          <li><a href="#faq" class="hover:text-gray-300 transition-colors duration-300">FAQ</a></li>
-        </ul>
-      </nav>
-      <button class="md:hidden text-3xl">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <section id="hero" class="py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        <div class="md:w-1/2 space-y-6">
-          <h1 class="text-5xl font-bold">Run Windows on your Redmi Note 9 Pro / 9 Pro India / 10 Lite / 9S / 9 Pro max India / Poco M2 Pro</h1>
-          <p class="text-xl">Unlock the power of Windows on your Miatoll device.</p>
-          <a href="#installation" class="inline-block bg-white text-purple-500 py-3 px-6 rounded-full hover:bg-gray-300 transition-colors duration-300">Get Started</a>
+<body class="text-white">
+    <!-- Header -->
+    <header class="p-6 bg-opacity-50 bg-gray-900">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold gradient-text">Windows 11 port on Miatoll</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="hover:underline">About</a></li>
+                    <li><a href="#features" class="hover:underline">Features</a></li>
+                    <li><a href="#gallery" class="hover:underline">Gallery</a></li>
+                    <li><a href="#contact" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="md:w-1/2 mt-8 md:mt-0">
-          <img src="https://github.com/Rubanoxd/Port-Windows-11-redmi-note-9_pro/blob/main/Miatoll.png" alt="Windows 11 on Miatoll" class="w-full">
-        </div>
-      </div>
-    </section>
+    </header>
 
-    <section id="features" class="py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 bg-gradient-to-r from-indigo-500 to-purple-500">
-      <div class="container mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">Features</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <i class="fas fa-bolt text-4xl text-purple-500 mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Powerful</h3>
-            <p>Unleash the full potential of your device with Windows.</p>
-          </div>
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <i class="fas fa-bug text-4xl text-purple-500 mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Stable</h3>
-            <p>Enjoy a seamless and reliable Windows experience.</p>
-          </div>
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <i class="fas fa-cog text-4xl text-purple-500 mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Customizable</h3>
-            <p>Tailor your Windows setup to your needs and preferences.</p>
-          </div>
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <i class="fas fa-mobile-alt text-4xl text-purple-500 mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Mobile-Friendly</h3>
-            <p>Enjoy a seamless mobile experience with Windows on your device.</p>
-          </div>
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <i class="fas fa-cloud text-4xl text-purple-500 mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Cloud-Ready</h3>
-            <p>Integrate your device with cloud services and apps.</p>
-          </div>
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <i class="fas fa-sync text-4xl text-purple-500 mb-4"></i>
-            <h3 class="text-2xl font-bold mb-2">Updateable</h3>
-            <p>Stay up-to-date with the latest Windows features and security patches.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center">
+            <div class="text-center">
+                <h2 class="text-4xl md:text-6xl font-extrabold gradient-text">Experience Windows 11 on Redmi Note 9 Pro</h2>
+                <p class="mt-4 text-lg md:text-xl text-gray-300">Bringing the latest Windows experience to your mobile device</p>
+                <button class="mt-8 px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full">Learn More</button>
+            </div>
+        </section>
 
-    <section id="installation" class="py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 bg-gradient-to-r from-purple-500 to-pink-500">
-      <div class="container mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">Installation</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 class="text-2xl font-bold mb-4">Prerequisites</h3>
-            <ul class="list-disc pl-6 space-y-2">
-              <li>Modded OFOX</li>
-              <li>ADB & Fastboot</li>
-              <li>A Brain (Very important)</li>
-            </ul>
-          </div>
-          <div class="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 class="text-2xl font-bold mb-4">Steps</h3>
-            <ol class="list-decimal pl-6 space-y-2">
-              <li>Flash modded OFOX recovery</li>
-              <li>Run the partitioning script</li>
-              <li>Check if Android still starts</li>
-              <li>Boot OFOX recovery</li>
-              <li>Execute the msc script</li>
-              <li>Use Diskpart to assign drive letters</li>
-              <li>Install Windows</li>
-              <li>Install Drivers</li>
-              <li>Create Windows bootloader files</li>
-              <li>Enable test signing</li>
-              <li>Disable recovery</li>
-              <li>Disable integrity checks</li>
-              <li>Reboot to Android for dual boot setup</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
+        <!-- About Section -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text">About the Project</h2>
+                <p class="mt-8 text-center text-gray-300 max-w-3xl mx-auto">This project aims to port the Windows 11 experience to the Redmi Note 9 Pro. It brings all the modern features of Windows 11, optimized for mobile hardware.</p>
+            </div>
+        </section>
 
-    <section id="contributors" class="py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 bg-gradient-to-r from-pink-500 to-purple-500">
-      <div class="container mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">Contributors</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-          <a href="https://github.com/sunflower2333" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/54024877?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="sunflower2333" class="w-20 h-20 rounded-full mb-2">
-            <span>sunflower2333</span>
-          </a>
-          <a href="https://github.com/N1kroks" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/117468042?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="N1kroks" class="w-20 h-20 rounded-full mb-2">
-            <span>N1kroks</span>
-          </a>
-          <a href="https://github.com/Icesito68" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/113939920?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="Icesito68" class="w-20 h-20 rounded-full mb-2">
-            <span>Icesito68</span>
-          </a>
-          <a href="https://github.com/map220v" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/14368485?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="map220v" class="w-20 h-20 rounded-full mb-2">
-            <span>map220v</span>
-          </a>
-          <a href="https://github.com/degdag" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/22778181?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="degdag" class="w-20 h-20 rounded-full mb-2">
-            <span>degdag</span>
-          </a>
-          <a href="https://github.com/halal-beef" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/78730004?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="halal-beef" class="w-20 h-20 rounded-full mb-2">
-            <span>halal-beef</span>
-          </a>
-          <a href="https://github.com/edk2-porting" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/63859504?s=200&v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="Renegade Project" class="w-20 h-20 rounded-full mb-2">
-            <span>Renegade Project</span>
-          </a>
-          <a href="https://discord.gg/XXBWfag" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://cdn.discordapp.com/icons/736563593058713690/68f67bfddf4390b11effc99917b16338.webp?size=256&w=100&fit=cover&mask=circle&maxage=7d" alt="Renegade Project Discord Members" class="w-20 h-20 rounded-full mb-2">
-            <span>Renegade Project Discord</span>
-          </a>
-          <a href="https://github.com/BilalDaldal" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/165792688?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="BilalDaldal" class="w-20 h-20 rounded-full mb-2">
-            <span>BilalDaldal</span>
-          </a>
-          <a href="https://github.com/n00b69" class="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col items-center">
-            <img src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/83274506?v=4&w=100&fit=cover&mask=circle&maxage=7d" alt="n00b69" class="w-20 h-20 rounded-full mb-2">
-            <span>n00b69</span>
-          </a>
-        </div>
-      </div>
-    </section>
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-gray-800">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text">Features</h2>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-6 bg-gray-900 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold">Modern UI</h3>
+                        <p class="mt-4 text-gray-400">Enjoy the sleek and modern user interface of Windows 11 on your mobile device.</p>
+                    </div>
+                    <div class="p-6 bg-gray-900 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold">Optimized Performance</h3>
+                        <p class="mt-4 text-gray-400">Experience smooth and fast performance tailored for the Redmi Note 9 Pro.</p>
+                    </div>
+                    <div class="p-6 bg-gray-900 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold">Advanced Features</h3>
+                        <p class="mt-4 text-gray-400">Access all the advanced features of Windows 11 right from your phone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="faq" class="py-24 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 bg-gradient-to-r from-purple-500 to-pink-500">
-      <div class="container mx-auto">
-        <h2 class="text-4xl font-bold mb-12 text-center">FAQ</h2>
-        <div class="space-y-8">
-          <div>
-            <h3 class="text-2xl font-bold mb-2">What devices are supported?</h3>
-            <p>This project currently supports the Redmi Note 9 Pro / 9 Pro India / 10 Lite / 9S / 9 Pro max India / Poco M2 Pro.</p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-2">Is this project stable?</h3>
-            <p>This project is currently in the beta stage, which means that while most of the hardware works, some components may not be fully functional yet.</p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-2">What are the risks involved?</h3>
-            <p>Modifying your device and its partition table can be risky and may result in a bricked device. Please follow the instructions carefully and proceed at your own risk.</p>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-2">Can I dual boot Android and Windows?</h3>
-            <p>Yes, it is possible to set up a dual boot system with Android and Windows on your device.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-center gradient-text">Gallery</h2>
+                <div class="swiper mySwiper mt-12">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="images/gallery1.jpg" alt="Gallery Image 1" class="w-full h-auto"></div>
+                        <div class="swiper-slide"><img src="images/gallery2.jpg" alt="Gallery Image 2" class="w-full h-auto"></div>
+                        <div class="swiper-slide"><img src="images/gallery3.jpg" alt="Gallery Image 3" class="w-full h-auto"></div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
 
-  <footer class="bg-gray-800 py-6 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-    <div class="container mx-auto flex justify-between items-center">
-      <p>&copy; 2023 Windows on Miatoll. All rights reserved.</p>
-      <div class="flex space-x-4">
-        <a href="https://github.com/Rubanoxd/Port-Windows-11-redmi-note-9_pro" class="text-gray-400 hover:text-white transition-colors duration-300">
-          <i class="fab fa-github text-2xl"></i>
-        </a>
-        <a href="https://t.me/woamiatoll" class="text-gray-400 hover:text-white transition-colors duration-300">
-          <i class="fab fa-telegram text-2xl"></i>
-        </a>
-      </div>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="py-6 bg-gray-900 text-center text-gray-500">
+        &copy; 2024 Windows 11 port on Miatoll  . All rights reserved.
+    </footer>
 
-  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script>
-    // Swiper Slider
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
+    <!-- Scripts -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script>
+        // Swiper initialization
+        var swiper = new Swiper('.mySwiper', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
 
-    // GSAP Animation
-    const tl = gsap.timeline({ scrollTrigger: {
-      trigger: '#hero',
-      start: 'top',
-      end: '100%',
-      scrub: true,
-      pin: true
-    }});
+        // ScrollReveal initialization
+        ScrollReveal().reveal('header, section, footer', { 
+            duration: 1000,
+            reset: true 
+        });
 
-    tl.from('#hero .text-5xl', { y: '100%', duration: 1.5, ease: 'power2.out' })
-      .from('#hero .text-xl', { y: '100%', duration: 1.5, ease: 'power2.out' }, '-=1')
-      .from('#hero a', { y: '100%', duration: 1.5, ease: 'power2.out' }, '-=1');
-
-    // ScrollReveal Animation
-    ScrollReveal().reveal('#features .bg-white', {
-      delay: 300,
-      duration: 1000,
-      origin: 'bottom',
-      distance: '50px',
-      reset: true
-    });
-
-    ScrollReveal().reveal('#contributors .bg-white', {
-      delay: 300,
-      duration: 1000,
-      origin: 'bottom',
-      distance: '50px',
-      reset: true
-    });
-  </script>
+        // GSAP animations
+        gsap.from('header', { duration: 1, y: '-100%', ease: 'bounce' });
+        gsap.from('section', { duration: 1, opacity: 0, stagger: 0.3 });
+    </script>
 </body>
 </html>
